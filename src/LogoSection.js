@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 //import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -47,41 +47,46 @@ const LogoSection = () => {
     // Add more logos here
   ];
 
-//   const [startIndex, setStartIndex] = useState(0); // Start index of visible logos
+  // const [startX, setStartX] = useState(null);
+  // const [scrollLeft, setScrollLeft] = useState(0);
+  // const containerRef = useRef(null);
 
-//   const showNextLogo = () => {
-//     setStartIndex((prevIndex) => (prevIndex + 1) % logos.length);
-//   };
+  // const handleMouseDown = (e) => {
+  //   setStartX(e.pageX);
+  //   setScrollLeft(containerRef.current.scrollLeft);
+  // };
 
-//   const showPreviousLogo = () => {
-//     setStartIndex((prevIndex) => (prevIndex - 1 + logos.length) % logos.length);
-//   };
+  // const handleMouseMove = (e) => {
+  //   if (!startX) return;
+  //   const x = e.pageX;
+  //   const walk = (x - startX) * 2; // Adjust the sliding speed
+  //   containerRef.current.scrollLeft = scrollLeft - walk;
+  // };
 
-//   const visibleLogos = logos.slice(startIndex, startIndex + 6);
+  // const handleMouseUp = () => {
+  //   setStartX(null);
+  // };
+
+  // const [startX, setStartX] = useState(null);
+  // const [scrollLeft, setScrollLeft] = useState(0);
+  // const containerRef = useRef(null);
+
+  // const handleMouseDown = (e) => {
+  //   setStartX(e.pageX);
+  //   setScrollLeft(containerRef.current.scrollLeft);
+  // };
+
+  // const handleWheel = (e) => {
+  //   const delta = Math.sign(e.deltaX) * 20; // Adjust the scrolling speed
+  //   containerRef.current.scrollLeft -= delta;
+  // };
+
+  // const handleMouseUp = () => {
+  //   setStartX(null);
+  // };
 
 
-
-// const [startX, setStartX] = useState(null);
-//   const [scrollLeft, setScrollLeft] = useState(0);
-//   const containerRef = useRef(null);
-
-//   const handleMouseDown = (e) => {
-//     setStartX(e.pageX - containerRef.current.offsetLeft);
-//     setScrollLeft(containerRef.current.scrollLeft);
-//   };
-
-//   const handleMouseMove = (e) => {
-//     if (!startX) return;
-//     const x = e.pageX - containerRef.current.offsetLeft;
-//     const walk = (x - startX) * 2; // Adjust the sliding speed
-//     containerRef.current.scrollLeft = scrollLeft - walk;
-//   };
-
-//   const handleMouseUp = () => {
-//     setStartX(null);
-//   };
-
-const [startX, setStartX] = useState(null);
+  const [startX, setStartX] = useState(null);
   const [scrollLeft, setScrollLeft] = useState(0);
   const containerRef = useRef(null);
 
@@ -100,6 +105,13 @@ const [startX, setStartX] = useState(null);
   const handleMouseUp = () => {
     setStartX(null);
   };
+
+  const handleWheel = (e) => {
+    e.preventDefault(); // Prevent vertical scrolling of the window
+    const delta = Math.sign(e.deltaY || e.deltaX) * 20; // Adjust the scrolling speed
+    containerRef.current.scrollLeft -= delta;
+  };
+
   return (
     <div
       style={{
@@ -109,18 +121,25 @@ const [startX, setStartX] = useState(null);
         display: "flex",
         flexDirection: "column",
         //border: "2px solid red",
-        paddingLeft: '20px',
-        position: 'relative',
+        paddingLeft: "20px",
+        position: "relative",
 
-        overflowX: 'scroll', // Enable horizontal scrolling
-        overflowY: 'hidden', // Disable vertical scrolling
-        margin: '0 auto', // Center the logo section horizontally
+        overflowX: "scroll", // Enable horizontal scrolling
+        overflowY: "hidden", // Disable vertical scrolling
+        margin: "0 auto", // Center the logo section horizontally
       }}
+      // ref={containerRef}
+      // onMouseDown={handleMouseDown}
+      // onMouseMove={handleMouseMove}
+      // onMouseUp={handleMouseUp}
+      // onMouseLeave={handleMouseUp}
+
       ref={containerRef}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onWheel={handleWheel}
     >
       <h3 style={{ marginTop: "28px", marginRight: "550px" }}>
         Join these great companies committed to fighting climate change
@@ -144,37 +163,6 @@ const [startX, setStartX] = useState(null);
           </div>
         ))}
       </div>
-      {/* {startIndex > 0 && (
-
-<div
-onClick={showPreviousLogo}
-style={{
-  position: 'absolute',
-  top: '50%',
-  left: '20px',
-  transform: 'translateY(-50%)',
-  cursor: 'pointer',
-}}
->
-<FaChevronLeft size={24} />
-</div>
-
-      )}
-      {startIndex + 6 < logos.length && (
-
-        <div
-          onClick={showNextLogo}
-          style={{
-            position: 'absolute',
-            top: '50%',
-            right: '20px',
-            transform: 'translateY(-50%)',
-            cursor: 'pointer',
-          }}
-        >
-          <FaChevronRight size={24} />
-        </div>
-      )} */}
     </div>
   );
 };
