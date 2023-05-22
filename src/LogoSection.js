@@ -76,19 +76,6 @@ const LogoSection = () => {
 
   return (
     <div
-      // style={{
-      //   width: "100%",
-      //   maxWidth: "1440px",
-      //   flexWrap: "wrap",
-      //   height: "330px",
-      //   display: "flex",
-      //   flexDirection: "column",
-      //   paddingLeft: "20px",
-      //   position: "relative",
-      //   overflowX: "scroll", // Enable horizontal scrolling
-      //   overflowY: "hidden", // Disable vertical scrolling
-      //   margin: "0 auto", // Center the logo section horizontally
-      // }}
       style={{
         width: "100%",
         maxWidth: "1440px",
