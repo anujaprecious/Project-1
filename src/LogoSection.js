@@ -47,47 +47,9 @@ const LogoSection = () => {
     // Add more logos here
   ];
 
-  // const [startX, setStartX] = useState(null);
-  // const [scrollLeft, setScrollLeft] = useState(0);
-  // const containerRef = useRef(null);
-
-  // const handleMouseDown = (e) => {
-  //   setStartX(e.pageX);
-  //   setScrollLeft(containerRef.current.scrollLeft);
-  // };
-
-  // const handleMouseMove = (e) => {
-  //   if (!startX) return;
-  //   const x = e.pageX;
-  //   const walk = (x - startX) * 2; // Adjust the sliding speed
-  //   containerRef.current.scrollLeft = scrollLeft - walk;
-  // };
-
-  // const handleMouseUp = () => {
-  //   setStartX(null);
-  // };
-
-  // const [startX, setStartX] = useState(null);
-  // const [scrollLeft, setScrollLeft] = useState(0);
-  // const containerRef = useRef(null);
-
-  // const handleMouseDown = (e) => {
-  //   setStartX(e.pageX);
-  //   setScrollLeft(containerRef.current.scrollLeft);
-  // };
-
-  // const handleWheel = (e) => {
-  //   const delta = Math.sign(e.deltaX) * 20; // Adjust the scrolling speed
-  //   containerRef.current.scrollLeft -= delta;
-  // };
-
-  // const handleMouseUp = () => {
-  //   setStartX(null);
-  // };
-
-
   const [startX, setStartX] = useState(null);
   const [scrollLeft, setScrollLeft] = useState(0);
+
   const containerRef = useRef(null);
 
   const handleMouseDown = (e) => {
@@ -108,32 +70,44 @@ const LogoSection = () => {
 
   const handleWheel = (e) => {
     e.preventDefault(); // Prevent vertical scrolling of the window
-    const delta = Math.sign(e.deltaY || e.deltaX) * 20; // Adjust the scrolling speed
+    const delta = Math.sign(e.deltaY || e.deltaX) * 40; // Adjust the scrolling speed
     containerRef.current.scrollLeft -= delta;
   };
 
   return (
     <div
+      // style={{
+      //   width: "100%",
+      //   maxWidth: "1440px",
+      //   flexWrap: "wrap",
+      //   height: "330px",
+      //   display: "flex",
+      //   flexDirection: "column",
+      //   paddingLeft: "20px",
+      //   position: "relative",
+      //   overflowX: "scroll", // Enable horizontal scrolling
+      //   overflowY: "hidden", // Disable vertical scrolling
+      //   margin: "0 auto", // Center the logo section horizontally
+      // }}
       style={{
         width: "100%",
         maxWidth: "1440px",
+
         height: "330px",
+        flexWrap: "wrap",
         display: "flex",
         flexDirection: "column",
-        //border: "2px solid red",
         paddingLeft: "20px",
         position: "relative",
-
-        overflowX: "scroll", // Enable horizontal scrolling
+        overflowX: "hidden", // Enable horizontal scrolling
         overflowY: "hidden", // Disable vertical scrolling
         margin: "0 auto", // Center the logo section horizontally
+        scrollbarWidth: "none", // Hide the scrollbar for Firefox
+        "-ms-overflow-style": "none", // Hide the scrollbar for IE and Edge
+        "&::-webkit-scrollbar": {
+          display: "none", // Hide the scrollbar for Chrome, Safari, and Opera
+        },
       }}
-      // ref={containerRef}
-      // onMouseDown={handleMouseDown}
-      // onMouseMove={handleMouseMove}
-      // onMouseUp={handleMouseUp}
-      // onMouseLeave={handleMouseUp}
-
       ref={containerRef}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -141,15 +115,17 @@ const LogoSection = () => {
       onMouseLeave={handleMouseUp}
       onWheel={handleWheel}
     >
-      <h3 style={{ marginTop: "28px", marginRight: "550px" }}>
+      <h3 style={{ marginTop: "28px", width: "686px", height: "24px" }}>
         Join these great companies committed to fighting climate change
       </h3>
       <div
         style={{
           display: "flex",
+
           justifyContent: "center",
           alignItems: "center",
-          flexWrap: "wrap",
+          //flexWrap: "wrap",
+          gap: "48px",
           marginTop: "60px",
         }}
       >
@@ -158,7 +134,7 @@ const LogoSection = () => {
             <img
               src={logo.src}
               alt={logo.alt}
-              style={{ width: "190px", height: "150px", margin: "10px" }}
+              style={{ width: "170px", height: "96px", margin: "10px" }}
             />
           </div>
         ))}
