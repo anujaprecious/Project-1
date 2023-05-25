@@ -118,8 +118,8 @@ return (
                         maxWidth: "100%",
                         maxHeight: "100%",
 
-                        width: "122px",
-                        height: "26px",
+                        width: "100px",
+                        height: "30px",
                       }}
                     />
                   </div>
