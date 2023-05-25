@@ -1,87 +1,33 @@
-import React, { useState, useRef } from "react";
-//import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/css/autoplay'; 
 
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+SwiperCore.use([Navigation, Pagination, Autoplay]);
+
+
 const LogoSection = () => {
-  const logos = [
-    {
-      id: 1,
-      src: "Google Logo.png",
-      alt: "Google Logo",
-    },
-    {
-      id: 2,
-      src: "Microsoft Logo.png",
-      alt: "Microsoft Logo",
-    },
-    {
-      id: 3,
-      src: "Vector.png",
-      alt: "OYO Logo",
-    },
-    {
-      id: 4,
-      src: "FedEx Logo.png",
-      alt: "FedEx Logo",
-    },
-    {
-      id: 5,
-      src: "Amazon Logo.png",
-      alt: "Microsoft Logo",
-    },
-    {
-      id: 6,
-      src: "OLA logo.png",
-      alt: "Ola Logo",
-    },
-    {
-      id: 7,
-      src: "OLA logo.png",
-      alt: "Ola Logo",
-    },
-    {
-      id: 8,
-      src: "OLA logo.png",
-      alt: "Ola Logo",
-    },
-    // Add more logos here
+
+  const images = [
+    'Google Logo.png',
+    'Microsoft Logo.png',
+    'Vector.png',
+    'FedEx Logo.png',
+    'Amazon Logo.png',
+    'OLA logo.png',
+    'OLA logo.png',
+    'OLA logo.png',
+
   ];
 
-
-  const [startX, setStartX] = useState(null);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
-  const containerRef = useRef(null);
-
-  const handleMouseDown = (e) => {
-    setStartX(e.pageX);
-    setScrollLeft(containerRef.current.scrollLeft);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!startX) return;
-    const x = e.pageX;
-    const walk = (x - startX) * 2; // Adjust the sliding speed
-    const logoContainer = containerRef.current;
-    logoContainer.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    setStartX(null);
-  };
-
-  const handleWheel = (e) => {
-    e.preventDefault(); // Prevent vertical scrolling of the window
-    const delta = Math.sign(e.deltaY || e.deltaX) * 40; // Adjust the scrolling speed
-    containerRef.current.scrollLeft -= delta;
-  };
+return (
 
 
-  return (
     <div style={{ maxWidth: "1440px", height: "300px", width: "100%", margin: "0 auto" }}>
       <h3
         style={{
-          marginTop: "28px",
+          marginTop: "29px",
+          marginBottom: "247px",
           width: "100%",
           maxWidth: "686px",
           height: "24px",
@@ -93,81 +39,102 @@ const LogoSection = () => {
       >
         Join these great companies committed to fighting climate change
       </h3>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          marginTop: "60px",
-          overflowX: "hidden",
-          overflowY: "hidden",
-          scrollbarWidth: "none",
-          "-ms-overflow-style": "none",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-        }}
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onWheel={handleWheel}
-      >
 
-        {logos.map((logo) => (
-          <div
-            key={logo.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
+      <div style={{ display: 'flex', alignItems: "center", justifyContent: "flex-start", marginTop: '60px' }}>
+        {/* <div
+          style={{
 
-              alignItems: "center",
-              marginRight: "48px", // Added margin between boxes
-              marginTop: "128px", // Apply top margin
-              marginBottom: "76px",
-              background: "#FFFFFF", // Apply white background
-              boxShadow: "0px 30px 40px rgba(212, 217, 232, 0.2)", // Apply grey shadow
-              borderRadius: "16px", // Apply border radius
-              //display: "flex",
-              //flexDirection: "column",
-              justifyContent: "center",
-              //alignItems: "center",
-              padding: "16px", // Add padding for content
-            }}
-          >
-            <div
-              style={{
-                width: "170px",
-                height: "96px",
-                margin: "10px",
-                //gap:"48px",
-                //border: "1px solid #ccc",
-                borderRadius: "8px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+            width: '100%',
+            maxWidth: 'auto',
+            borderRadius: '16px',
+            overflow: 'hidden',
 
-              }}
-            >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  width: "122px",
-                  height: "26",
+          }}
+        > */}
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={90}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{
+            delay: 1000, // Default delay between slides
+            disableOnInteraction: true,
+          }}
+          breakpoints={{
+            390: {
+              slidesPerView: 2, // Show only one slide on iPhone 12 Pro
+              spaceBetween: 18, // Adjust the spacing as desired
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 18,
+            },
+            1200: {
+              slidesPerView: 6,
+              spaceBetween: 18,
+            },
+          }}
+        >
+          {images &&
+            images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  style={{
 
-                }}
-              />
-            </div>
-            {/* <div style={{ marginTop: "6px" }}>{logo.alt}</div> */}
-          </div>
-        ))}
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginRight: "48px", // Added margin between boxes
+                    marginTop: "128px", // Apply top margin
+                    marginBottom: "76px",
+                    background: "#FFFFFF", // Apply white background
+                    boxShadow: "0px 30px 40px rgba(212, 217, 232, 0.2)", // Apply grey shadow
+                    borderRadius: "16px", // Apply border radius
+                    //display: "flex",
+                    //flexDirection: "column",
+                    justifyContent: "center",
+                    //alignItems: "center",
+
+                    padding: "16px", // Add padding for content
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "170px",
+                      height: "96px",
+                      margin: "10px",
+                      //gap:"48px",
+                      //border: "1px solid #ccc",
+                      borderRadius: "8px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+
+                    }}>
+                    <img
+                      src={image}
+                      alt={`Image ${index + 1}`}
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+
+                        width: "122px",
+                        height: "26px",
+                      }}
+                    />
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+        </Swiper>
+        {/* </div> */}
       </div>
     </div>
+
+
   );
 };
 
 export default LogoSection;
+
+
